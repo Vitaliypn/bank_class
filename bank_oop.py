@@ -130,6 +130,9 @@ class Client:
         return f"Client name: {self.name}, surname: {self.surname},\
  id: {self.id}, wallets: {self.__wallets}"
 
+    def __repr__(self) -> str:
+        return f"Client_{self.id}"
+
     def add_wallet(self, wallet):
         """Add wallet to client"""
         if not isinstance(wallet, (UanWallet, UsdWallet)):
