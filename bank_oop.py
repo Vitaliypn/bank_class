@@ -83,7 +83,7 @@ class UsdWallet(Wallet):
     usd_to_uan = 40
     def __init__(self, balance):
         super().__init__(balance)
-    
+
     def __repr__(self):
         return f"USDWallet_{self.id}"
 
@@ -107,8 +107,7 @@ class Client:
     capacity = 3
     client_id = 3421
     def __init__(self, first_name, last_name, age):
-        if not 18 <= age <= 100:
-            raise AgeErroe("To became a client you have to be at least 18 years old")
+        Client.test_age(age)
         self.name = first_name
         self.surname = last_name
         #for class client id start with 3421 and encreased by one point
@@ -117,14 +116,18 @@ class Client:
         self.__wallets = []
         self.number_wallets = 0
 
+    @staticmethod
+    def test_age(age):
+        """Raising an Ageerror if client is under 18"""
+        if not isinstance(age,int) and not 18 <= age <= 100:
+            raise AgeErroe("To became a client you have to be at least 18 years old")
+
     @property
     def wallets(self):
         """Return wallets of client"""
         if not self.__wallets:
             return "Client has no wallets"
         return self.__wallets
-
-
 
     def __str__(self):
         return f"Client name: {self.name}, surname: {self.surname},\
@@ -179,10 +182,12 @@ class Bank:
 
     @property
     def capital(self):
+        """Returning the total of bank capital"""
         return self.__capital
 
     @capital.setter
     def capital(self):
+        """Counting the total capital for bank"""
         capital = 0
         for client in self.clients:
             capital += client.total_sum_uan()
@@ -190,10 +195,9 @@ class Bank:
 
     def add_client(self, client):
         """Add new client to bank"""
-        if isinstance(client, Client):
-            self.clients.append(client)
-        else:
+        if not isinstance(client, Client):
             return "You can add no object except Client"
+        self.clients.append(client)
 
     def remove_client(self, cliend_id):
         """Remove client of bank by id"""
