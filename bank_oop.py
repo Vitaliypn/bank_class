@@ -180,6 +180,7 @@ class Bank:
     def __init__(self, bank_name):
         self.name = bank_name
         self.clients = []
+        self.clients_amount = 0
         self.__capital = 0
 
     @property
@@ -199,6 +200,7 @@ class Bank:
         """Add new client to bank"""
         if not isinstance(client, Client):
             return "You can add no object except Client"
+        self.clients_amount += 1
         self.clients.append(client)
 
     def remove_client(self, cliend_id):
@@ -206,5 +208,6 @@ class Bank:
         for client in self.clients:
             if client.id == cliend_id:
                 self.clients.remove(client)
+                self.clients_amount -= 1
                 return "Client was successfully deleted"
         return "There is no client with such id"
