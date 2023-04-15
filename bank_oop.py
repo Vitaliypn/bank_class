@@ -143,6 +143,7 @@ class Client:
         if self.number_wallets >= self.capacity:
             return "You can't add more wallet"
         self.__wallets.append(wallet)
+        self.number_wallets += 1
         return f"{wallet} was successfully added"
 
     def remove_wallet(self, wallet_id):
@@ -150,6 +151,7 @@ class Client:
         for wallet in self.__wallets:
             if wallet.id == wallet_id:
                 self.__wallets.remove(wallet)
+                self.number_wallets -= 1
                 return "Wallet was succesfully deleted"
         return f"There is no wallet with id: {wallet_id}"
 
