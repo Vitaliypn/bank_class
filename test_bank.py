@@ -1,4 +1,4 @@
-from bank__oop import *
+from bank_oop import *
 
 def test_bank():
     wallet_1 = Wallet(10000)
