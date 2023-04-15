@@ -67,7 +67,7 @@ class UanWallet(Wallet):
             raise ValueError("Your replenishment amount must be a positive number")
         if not isinstance(other, Wallet):
             return "You must insert only from another wallet"
-        if amount > other.balance:
+        if amount / self.usd_to_uan > other.balance:
             raise WalletOperationError("Replenishment amount must be not bigger than your balance")
         if isinstance(other, UanWallet):
             self.balance += amount
@@ -92,7 +92,7 @@ class UsdWallet(Wallet):
             raise ValueError("Your replenishment amount must be a positive number")
         if not isinstance(other, Wallet):
             return "You must insert only from another wallet"
-        if amount > other.balance:
+        if amount * self.usd_to_uan > other.balance:
             raise WalletOperationError("Replenishment amount must be not bigger than your balance")
         if isinstance(other, UanWallet):
             self.balance += amount
