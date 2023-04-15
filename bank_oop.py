@@ -107,7 +107,8 @@ class Client:
     capacity = 3
     client_id = 3421
     def __init__(self, first_name, last_name, age):
-        Client.test_age(age)
+        if Client.test_age(age) is False:
+            raise AgeErroe("To became a client you have to be at least 18 years old")
         self.name = first_name
         self.surname = last_name
         #for class client id start with 3421 and encreased by one point
@@ -119,8 +120,8 @@ class Client:
     @staticmethod
     def test_age(age):
         """Raising an Ageerror if client is under 18"""
-        if not isinstance(age,int) and not 18 <= age <= 100:
-            raise AgeErroe("To became a client you have to be at least 18 years old")
+        return isinstance(age,int) and 18 <= age <= 100
+           
 
     @property
     def wallets(self):
@@ -189,7 +190,7 @@ class Bank:
         return self.__capital
 
     @capital.setter
-    def capital(self):
+    def capital(self, value):
         """Counting the total capital for bank"""
         capital = 0
         for client in self.clients:
