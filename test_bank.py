@@ -136,11 +136,13 @@ def test_bank():
     bank_1.add_client(client_1)
     assert bank_1.add_client('client_1') == "You can add no object except Client"
     assert bank_1.clients_amount == 1
+    # calling the setter method
     bank_1.capital = None
     assert bank_1.capital == 9000
 
     assert bank_1.remove_client(3421) == "Client was successfully deleted"
     assert bank_1.clients_amount == 0
+    # calling the setter method
     bank_1.capital = None
     assert bank_1.capital == 0
 
