@@ -101,6 +101,11 @@ def test_bank():
     assert client_1.number_wallets == 0
     assert str(client_1) == "Client name: Vitalii, surname: Paliichuk, id: 3421, wallets: []"
     assert client_1.wallets == "Client has no wallets"
+    
+    #try:
+    #  client_2 = Client('Anastasiia', 'Martsinkovska', 17)
+    #except AgeErroe as e:
+    #  assert str(e) == "To became a client you have to be at least 18 years old"
 
     uan_wallet1_vp = UanWallet(1000)
     assert uan_wallet1_vp.id == 23495
