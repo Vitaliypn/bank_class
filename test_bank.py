@@ -1,4 +1,4 @@
-from bank_oop import *
+from bank__oop import *
 
 def test_bank():
     wallet_1 = Wallet(10000)
@@ -101,11 +101,11 @@ def test_bank():
     assert client_1.number_wallets == 0
     assert str(client_1) == "Client name: Vitalii, surname: Paliichuk, id: 3421, wallets: []"
     assert client_1.wallets == "Client has no wallets"
-    
-    #try:
-    #  client_2 = Client('Anastasiia', 'Martsinkovska', 17)
-    #except AgeErroe as e:
-    #  assert str(e) == "To became a client you have to be at least 18 years old"
+
+    try:
+        client_2 = Client('Anastasiia', 'Martsinkovska', 17)
+    except AgeErroe as e:
+        assert str(e) == "To became a client you have to be at least 18 years old"
 
     uan_wallet1_vp = UanWallet(1000)
     assert uan_wallet1_vp.id == 23495
@@ -117,8 +117,8 @@ def test_bank():
     assert usd_wallet4_vp.id == 23498
 
     assert client_1.add_wallet(uan_wallet1_vp) == "Your wallet balance is equel to 1000 uan was successfully added"
-    assert client_1.add_wallet(usd_wallet2_vp) == "Your wallet balance is equel to 150 usd was successfully added" 
-    assert client_1.add_wallet(uan_wallet3_vp) == "Your wallet balance is equel to 3000 uan was successfully added" 
+    assert client_1.add_wallet(usd_wallet2_vp) == "Your wallet balance is equel to 150 usd was successfully added"
+    assert client_1.add_wallet(uan_wallet3_vp) == "Your wallet balance is equel to 3000 uan was successfully added"
     assert client_1.add_wallet(usd_wallet4_vp) == "You can't add more wallet"
 
     assert client_1.remove_wallet(23495) == "Wallet was succesfully deleted"
@@ -136,11 +136,13 @@ def test_bank():
     bank_1.add_client(client_1)
     assert bank_1.add_client('client_1') == "You can add no object except Client"
     assert bank_1.clients_amount == 1
-    #assert bank_1.capital == 9000
+    bank_1.capital = None
+    assert bank_1.capital == 9000
 
     assert bank_1.remove_client(3421) == "Client was successfully deleted"
     assert bank_1.clients_amount == 0
-    #assert bank_1.capital == 0
+    bank_1.capital = None
+    assert bank_1.capital == 0
 
     assert bank_1.remove_client(9999) ==  "There is no client with such id"
 
