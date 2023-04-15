@@ -70,11 +70,11 @@ class UanWallet(Wallet):
         if amount > other.balance:
             raise WalletOperationError("Replenishment amount must be not bigger than your balance")
         if isinstance(other, UanWallet):
-            pass
+            self.balance += amount
+            other.balance -= amount
         elif isinstance(other, UsdWallet):
-            amount /= self.usd_to_uan
-        self.balance += amount
-        other.balance -= amount
+            self.balance += amount
+            other.balance -= (amount / self.usd_to_uan)
         return f"Your account has been replenished by {amount} {self.currency}"
 
 class UsdWallet(Wallet):
@@ -95,11 +95,11 @@ class UsdWallet(Wallet):
         if amount > other.balance:
             raise WalletOperationError("Replenishment amount must be not bigger than your balance")
         if isinstance(other, UanWallet):
-            amount *= self.usd_to_uan
+            self.balance += amount
+            other.balance -= (amount * self.usd_to_uan)
         elif isinstance(other, UsdWallet):
-            pass
-        self.balance += amount
-        other.balance -= amount
+            self.balance += amount
+            other.balance -= amount
         return f"Your account has been replenished by {amount} {self.currency}"
 
 class Client:
